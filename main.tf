@@ -4,7 +4,7 @@ resource "google_project_service" "run_api" {
 }
 
 # Cloud Run Service
-resource "google_cloud_run_service" "landing_page" {
+resource "google_cloud_run_service" "landing-page" {
   name     = "my-landing-page"
   location = var.region
 

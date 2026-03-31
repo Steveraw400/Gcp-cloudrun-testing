@@ -10,7 +10,7 @@ env:
   PROJECT_ID: rawson-devops-project
   REGION: us-central1
   REPO: my-repo
-  SERVICE: landing_page
+  SERVICE: landing-page
   IMAGE: landing-page
 
 jobs:
