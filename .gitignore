@@ -6,6 +6,11 @@ terraform/*.tfstate
 terraform/*.tfstate.backup
 terraform/crash.log
 
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
 # Docker
 .dockerignore
 
