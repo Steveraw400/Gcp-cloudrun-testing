@@ -4,33 +4,31 @@ resource "google_project_service" "run_api" {
 }
 
 # Cloud Run Service
-resource "google_cloud_run_service" "landing-page" {
+resource "google_cloud_run_v2_service" "landing_page" {
   name     = "my-landing-page"
   location = var.region
 
   template {
-    spec {
-      containers {
-        image = var.container_image
+    containers {
+      image = var.container_image
+      ports {
+        container_port = 8080
       }
     }
-  }
-
-  traffic {
-    percent         = 100
-    latest_revision = true
   }
 
   depends_on = [google_project_service.run_api]
 }
 
 # Allow public access
-resource "google_cloud_run_service_iam_member" "public_access" {
-  service  = google_cloud_run_service.landing_page.name
-  location = google_cloud_run_service.landing_page.location
+resource "google_cloud_run_v2_service_iam_member" "public_access" {
+  project  = google_cloud_run_v2_service.landing_page.project
+  location = google_cloud_run_v2_service.landing_page.location
+  name     = google_cloud_run_v2_service.landing_page.name
   role     = "roles/run.invoker"
   member   = "allUsers"
 }
+
 
 data "google_project" "project" {}
 
